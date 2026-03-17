@@ -7,7 +7,10 @@ jobs:
     steps:
       - name: Checkout and Runtime
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install --no-cache-dir -r requirements.txt
+          echo ${pwd}
+          echo $(ls -lha)
+        # run: |
+        #   python -m venv .venv
+        #   source .venv/bin/activate
+        #   pip install --no-cache-dir -r requirements.txt
 
