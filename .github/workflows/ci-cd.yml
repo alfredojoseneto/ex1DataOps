@@ -1,14 +1,16 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Esteira CI/CD Python baseda em Github Actions
+on:
+  push:
+    branches:
+      - main
 jobs:
   validador:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout and Runtime
         run: |
-          echo ${pwd}
-          echo $(ls -lha)
+          echo "${pwd}"
+          echo "$(ls -lha)"
         # run: |
         #   python -m venv .venv
         #   source .venv/bin/activate
