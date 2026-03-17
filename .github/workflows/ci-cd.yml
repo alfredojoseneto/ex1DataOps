@@ -7,9 +7,11 @@ jobs:
   validador:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Checkout and Runtime
         run: |
           python -m venv .venv
           source .venv/bin/activate
           pip install --no-cache-dir -r requirements.txt
-
