@@ -1,0 +1,13 @@
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  validador:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout and Runtime
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --no-cache-dir -r requirements.txt
+
