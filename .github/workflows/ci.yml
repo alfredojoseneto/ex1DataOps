@@ -23,10 +23,8 @@ jobs:
       # Cria o ambiente virtual, ativa-o, atualiza o pip e instala as dependências do projeto
       - name: Configuração do ambiente virtual
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
           python -m pip install --upgrade pip
-          pip install --no-cache-dir -r requirements.txt
+          python -m pip install --no-cache-dir -r requirements.txt
 
       # Executa a análise estática de estilo de código (linting) na pasta app com o flake8
       - name: Linting - análise estática do estilo do código
