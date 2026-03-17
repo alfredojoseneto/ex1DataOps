@@ -1,21 +1,54 @@
 name: Esteira CI/CD Python baseda em Github Actions
+
 on:
   push:
     branches:
       - main
+
 jobs:
   validador:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+
+      # Faz o clone do repositório no ambiente de execução do runner
+      - name: Checkout para ambiente de execução do runner
         uses: actions/checkout@v3
 
-      - name: Checkout and Runtime
+      # Instala e configura a versão especificada do Python no runner
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # Cria o ambiente virtual, ativa-o, atualiza o pip e instala as dependências do projeto
+      - name: Configuração do ambiente virtual
         run: |
           python -m venv .venv
           source .venv/bin/activate
+          python -m pip install --upgrade pip
           pip install --no-cache-dir -r requirements.txt
 
-      - name: Dependências e Qualidade
+      # Executa a análise estática de estilo de código (linting) na pasta app com o flake8
+      - name: Linting - análise estática do estilo do código
         run: |
-          python -m flake8 app tests
+          python -m flake8 app
+
+      # Roda a suíte de testes automatizados com o pytest para garantir que o código funciona corretamente
+      - name: Pytest - execução da suite de testes
+        run: |
+            python -m pytest tests   
+
+      # Analisa o código da pasta app em busca de vulnerabilidades de segurança com o bandit
+      - name: Bandit - análise de vulnerabilidades
+        run: |
+          python -m bandit -r app
+
+      # Verifica a tipagem estática do código com o mypy para identificar erros de tipo
+      - name: MyPy - análise estática da tipagem
+        run: |
+            python -m mypy app
+
+      # Executa a ferramenta randon para análise adicional de cobertura e qualidade do código
+      - name: Randon - análise da complexidade do código
+        run: |
+            python -m randon cc app -a
