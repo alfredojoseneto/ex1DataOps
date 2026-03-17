@@ -49,4 +49,4 @@ jobs:
       # Executa a ferramenta randon para análise adicional de cobertura e qualidade do código
       - name: Randon - análise da complexidade do código
         run: |
-            python -m randon cc app -a
+            python -m radon cc app -a
